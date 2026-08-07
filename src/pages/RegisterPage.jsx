@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import registerBg from "../assets/registration-bg.jpg";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [fullname, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,12 +65,15 @@ const RegisterPage = () => {
     }
 
     toast.success("Registration Successful!");
+
     setFullName("");
     setEmail("");
     setPassword("");
     setGender("");
     setCountry("");
     setSkills([]);
+
+    navigate("/");
   };
 
   return (
@@ -195,10 +201,16 @@ const RegisterPage = () => {
 
         <button
           type="submit"
-          className="bg-blue-400 text-white font-bold py-1 rounded-full cursor-pointer hover:bg-blue-500 tracking-wide"
+          className="bg-blue-400 text-white font-bold py-1 mb-3 rounded-full cursor-pointer hover:bg-blue-500 tracking-wide"
         >
           Register
         </button>
+        <p className="text-gray-700">
+          Already have an account?{" "}
+          <Link to="/" className="font-bold tracking-wide">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );

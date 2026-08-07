@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import loginBg from "../assets/Login-bg.jpg";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +12,13 @@ const LoginPage = () => {
 
     if (email.trim() === "") {
       toast.error("Email is required");
+      return;
+    }
+
+    const emailRegex = /^\S+@\S+\.\S+$/;
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email");
       return;
     }
 
@@ -66,10 +74,16 @@ const LoginPage = () => {
         />
         <button
           type="submit"
-          className="bg-blue-400 text-white font-bold py-1.5 rounded-lg tracking-wide cursor-pointer hover:bg-blue-500"
+          className="bg-blue-400 text-white font-bold py-1.5 mb-3 rounded-lg tracking-wide cursor-pointer hover:bg-blue-500"
         >
           Sign In
         </button>
+        <p className="text-gray-700">
+          Don't have an account?{" "}
+          <Link to="/register" className="font-bold tracking-wide">
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   );
